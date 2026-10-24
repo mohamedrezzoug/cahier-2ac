@@ -253,6 +253,46 @@ h3{font-family:var(--f-disp);font-weight:500;font-size:.95em;color:var(--soft);m
 .vec::before{content:"";position:absolute;top:.14em;left:.04em;right:.2em;border-top:1.3px solid currentColor}
 .vec::after{content:"";position:absolute;top:-.01em;right:0;border-left:.32em solid currentColor;border-top:.15em solid transparent;border-bottom:.15em solid transparent}
 @media (max-width:420px){.steps button{font-size:.72em}h2{font-size:1.2em}}
+
+/* ===== أيقونات 3D ===== */
+.ic{--s:44px;width:var(--s);height:var(--s);flex:none;position:relative;display:inline-grid;place-items:center;border-radius:30%;color:var(--g2);
+ background:radial-gradient(130% 100% at 28% 12%,var(--g1) 0%,var(--g2) 78%);
+ box-shadow:inset 0 2px 1px rgba(255,255,255,.55),inset 0 -4px 7px rgba(0,0,0,.22),0 7px 14px -6px var(--g2),0 2px 3px rgba(0,0,0,.14)}
+.ic::after{content:"";position:absolute;left:9%;right:9%;top:4%;height:46%;border-radius:45% 45% 60% 60%/60% 60% 40% 40%;background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,0));pointer-events:none}
+.ic svg{width:64%;height:64%;position:relative;z-index:1;filter:drop-shadow(0 2px 1.6px rgba(0,0,0,.3));overflow:visible}
+.ict{position:relative;z-index:1;color:#fff;font-family:var(--f-math);font-weight:600;font-size:calc(var(--s)*.46);line-height:1;text-shadow:0 1.5px 1.5px rgba(0,0,0,.3)}
+.mark{background:radial-gradient(130% 100% at 28% 12%,#5b97ff,#1d3fae 78%);color:#fff;border-radius:12px;box-shadow:inset 0 2px 1px rgba(255,255,255,.5),inset 0 -3px 6px rgba(0,0,0,.25),0 6px 12px -6px #1d3fae}
+.subj{position:relative;overflow:hidden;gap:8px;transition:transform .15s ease,box-shadow .15s ease;
+ background:linear-gradient(165deg,color-mix(in srgb,var(--g1) 16%,var(--sheet)) 0%,var(--sheet) 55%);border-color:color-mix(in srgb,var(--g2) 22%,var(--line))}
+.subj:hover{transform:translateY(-2px);box-shadow:0 10px 22px -12px var(--g2)}
+.subj .ic{margin-bottom:4px}
+.subj .bar i,.sbar i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.shead{display:flex;align-items:center;gap:14px;margin:8px 0 6px;padding:14px;border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--g1) 22%,var(--sheet)),color-mix(in srgb,var(--g2) 8%,var(--sheet)))}
+.shead h2{margin:0}
+.shead p{margin:2px 0 0;color:var(--soft);font-size:.82em}
+.lessons button{grid-template-columns:40px 1fr;align-items:center;gap:4px 12px}
+.lessons .ic{--s:34px;border-radius:32%}
+.lessons .chips{grid-column:2}
+.lhead{display:flex;align-items:center;gap:12px}
+.lhead .ic{--s:40px}
+.steps button{gap:4px;padding:8px 2px;min-height:74px}
+.steps button .ic{--s:34px;transition:transform .15s}
+.steps button[aria-selected="true"] .ic{transform:scale(1.12)}
+.steps button:not([aria-selected="true"]) .ic{filter:saturate(.75);opacity:.85}
+.quick .set,.set.gen{justify-content:flex-start;gap:12px}
+.quick .ic,.set .ic{--s:42px}
+.set.gen{background:linear-gradient(135deg,color-mix(in srgb,#5fb0ff 14%,var(--sheet)),var(--sheet));border-color:color-mix(in srgb,#1f5fd0 35%,var(--line))}
+.set .qi{flex:1}
+.starbar{justify-content:flex-start;gap:12px}.starbar b{margin-inline-start:auto}
+.starbar .ic{--s:36px}
+.nav button{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 8px}
+[dir="rtl"] .nav button{padding:6px 8px 6px 16px}
+.nav .ic{--s:30px}
+.lvtabs button{gap:4px}
+.lvtabs .ic{--s:24px;margin:0 1px}.lvtabs .stars{display:flex;gap:3px}
+.lvtabs button[aria-selected="true"]{border-color:var(--g2);box-shadow:0 0 0 1px var(--g2) inset;color:var(--ink);background:color-mix(in srgb,var(--g1) 14%,var(--sheet))}
+.qhead{display:flex;align-items:center;gap:12px}.qhead h2{margin:0}
+@media (prefers-reduced-motion:reduce){.subj,.steps .ic{transition:none}.subj:hover{transform:none}}
 </style>
 
 <div class="wrap">
@@ -3929,7 +3969,43 @@ const XF=[
 ];
 function applyFigs(){XF.forEach(([sid,li,sub,spec])=>{const S=SUBJ.find(s=>s.id===sid);if(!S||!S.L[li])return;S.L[li].x.forEach(E=>{if(String(E[1]).includes(sub))E.fig=spec})})}
 </script>
-<script>const UI={
+<script>/* ===== أيقونات ثلاثية الأبعاد ملونة ===== */
+const PAL={
+ math:["#5b97ff","#2147c4"], pc:["#c08bff","#6b2fd3"], svt:["#5ee08a","#119048"], soc:["#ffbd52","#e2620c"],
+ ar:["#ff8591","#cf2448"], fr:["#45d8e6","#0b7fa6"], isl:["#3fd9b4","#0a6f66"],
+ sum:["#6ea4ff","#3454d4"], exp:["#ffd75a","#ee8c06"], words:["#4fdcc8","#0e8a83"], prac:["#ff86b8","#d32f6b"], par:["#b896ff","#6a3bd6"],
+ mix:["#c08bff","#7333dc"], err:["#ff9a6a","#d9432a"], dice:["#5fb0ff","#1f5fd0"], set:["#9aaecd","#4b5e82"], trophy:["#ffd75a","#e88a00"], grid:["#6ea4ff","#3454d4"],
+ l1:["#5ee08a","#119048"], l2:["#ffbd52","#e2620c"], l3:["#ff8591","#cf2448"]
+};
+const star5=(cx,cy,R,r)=>{let p=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+","+(cy+q*Math.sin(a)).toFixed(1))}return p.join(" ")};
+const W='fill="#fff"',SW='stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round"',CC='stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+const GLY={
+ math:'<g '+SW+' stroke-width="4.2"><path d="M9 15h13M15.5 8.5v13M27 15h13M11 29l9 9M20 29l-9 9M27 34h13"/></g><circle cx="33.5" cy="27.5" r="2.6" '+W+'/><circle cx="33.5" cy="40.5" r="2.6" '+W+'/>',
+ pc:'<path d="M14.6 31h18.8l5.2 8.2a2.6 2.6 0 0 1-2.2 4H11.6a2.6 2.6 0 0 1-2.2-4z" '+W+'/><g '+SW+' stroke-width="3.6"><path d="M18 6h12M20.5 6v12.5L9.8 37.4a4.3 4.3 0 0 0 3.7 6.4h21a4.3 4.3 0 0 0 3.7-6.4L27.5 18.5V6"/></g><circle cx="21" cy="25" r="2.2" '+W+' opacity=".8"/><circle cx="27" cy="21" r="1.5" '+W+' opacity=".7"/>',
+ svt:'<path d="M41 7C22 7 8 16 8 31c0 4 1.3 7 3.3 9.3C27 40.5 41 28 41 7z" '+W+'/><path d="M11.5 40C19 30 26 22.5 34 15M20 31.5l-1-8M26 25l7 .5" '+CC+' stroke-width="2.6"/>',
+ soc:'<circle cx="24" cy="24" r="16.5" '+W+' opacity=".28"/><g '+SW+' stroke-width="3.4"><circle cx="24" cy="24" r="16.5"/><ellipse cx="24" cy="24" rx="7" ry="16.5"/><path d="M7.5 24h33"/></g><g '+SW+' stroke-width="2.4"><path d="M10.5 15h27M10.5 33h27"/></g>',
+ ar:'<text x="24" y="31" text-anchor="middle" font-family="Reem Kufi,Noto Naskh Arabic,serif" font-weight="700" font-size="30" '+W+'>ض</text>',
+ fr:'<path d="M9 8h30a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9.5 7.5V33H9a5 5 0 0 1-5-5V13a5 5 0 0 1 5-5z" '+W+'/><text x="24" y="27.5" text-anchor="middle" font-family="Alegreya Sans,Arial,sans-serif" font-weight="700" font-size="16" fill="currentColor">Aa</text>',
+ isl:'<path d="M27 6.5a17.5 17.5 0 1 0 13.5 28.6A14.2 14.2 0 1 1 27 6.5z" '+W+'/><polygon points="'+star5(33,19,7.5,3.2)+'" fill="#ffd96b"/>',
+ sum:'<rect x="11" y="9" width="26" height="33" rx="4.5" '+W+'/><rect x="17.5" y="5.5" width="13" height="8" rx="2.5" '+W+' stroke="currentColor" stroke-width="2"/><path d="M17 21h14M17 28h14M17 35h8" '+CC+' stroke-width="3"/>',
+ exp:'<circle cx="24" cy="19" r="13" '+W+'/><rect x="18.5" y="30" width="11" height="5" rx="1.5" '+W+' opacity=".9"/><rect x="19.5" y="37" width="9" height="4.5" rx="2.2" '+W+' opacity=".75"/><path d="M19.5 20l4.5 4.5 4.5-4.5M24 24.5V31" '+CC+' stroke-width="2.5"/>',
+ words:'<path d="M24 13.5C19 9.5 12 9 6 10.5v27c6-1.5 13-1 18 3 5-4 12-4.5 18-3v-27c-6-1.5-13-1-18 3z" '+W+'/><path d="M24 13.5v26.5M10.5 17c3.5-.6 6.5-.3 9 .8M10.5 23c3.5-.6 6.5-.3 9 .8M28.5 17.8c2.5-1.1 5.5-1.4 9-.8" '+CC+' stroke-width="2.2"/>',
+ prac:'<path d="M32.5 6.5l9 9L19 38l-11.5 2.5L10 29z" '+W+'/><path d="M10 29l9 9M28 11l9 9" '+CC+' stroke-width="2.6"/><path d="M7.5 40.5l3.5-.8-2.7-2.7z" fill="currentColor"/>',
+ par:'<circle cx="17" cy="15" r="6.5" '+W+'/><circle cx="33" cy="18" r="5.2" '+W+' opacity=".85"/><path d="M5 40c0-7.5 5.4-12.5 12-12.5S29 32.5 29 40z" '+W+'/><path d="M25 40c.8-6 4-10 8-10s7.6 4 8 10z" '+W+' opacity=".85"/>',
+ mix:'<g '+SW+' stroke-width="3.8"><path d="M7 15h8c9 0 12 18 21 18h4M7 33h8c9 0 12-18 21-18h4M35 10l5.5 5-5.5 5M35 28l5.5 5-5.5 5"/></g>',
+ err:'<g '+SW+' stroke-width="3.8"><path d="M38 20A14.5 14.5 0 0 0 12 15.5M10.5 8.5v8h8M10 28a14.5 14.5 0 0 0 26 4.5M37.5 39.5v-8h-8"/></g>',
+ dice:'<rect x="8" y="8" width="32" height="32" rx="8" '+W+'/><g fill="currentColor"><circle cx="16.5" cy="16.5" r="3.4"/><circle cx="31.5" cy="16.5" r="3.4"/><circle cx="24" cy="24" r="3.4"/><circle cx="16.5" cy="31.5" r="3.4"/><circle cx="31.5" cy="31.5" r="3.4"/></g>',
+ trophy:'<path d="M14 7h20v11a10 10 0 0 1-20 0z" '+W+'/><g '+SW+' stroke-width="3.2"><path d="M14 11H8.5v2.5a6.5 6.5 0 0 0 6.5 6.5M34 11h5.5v2.5a6.5 6.5 0 0 1-6.5 6.5"/></g><rect x="21" y="27" width="6" height="7" '+W+'/><rect x="14.5" y="34" width="19" height="7" rx="2.5" '+W+'/><polygon points="'+star5(24,16,5.4,2.3)+'" fill="currentColor"/>',
+ grid:'<rect x="8" y="8" width="14" height="14" rx="4" '+W+'/><rect x="26" y="8" width="14" height="14" rx="4" '+W+' opacity=".8"/><rect x="8" y="26" width="14" height="14" rx="4" '+W+' opacity=".8"/><rect x="26" y="26" width="14" height="14" rx="4" '+W+'/>'
+};
+GLY.l1=GLY.l2=GLY.l3='<polygon points="'+star5(24,25,17,7.4)+'" '+W+'/>';
+/* ico(nom, taille px, texte optionnel à la place du glyphe) */
+function ico(n,s,txt){const p=PAL[n]||PAL.set;const st='--g1:'+p[0]+';--g2:'+p[1]+';--s:'+(s||44)+'px';
+  const inner=txt!=null?'<b class="ict">'+txt+'</b>':'<svg viewBox="0 0 48 48" aria-hidden="true">'+(GLY[n]||"")+'</svg>';
+  return '<span class="ic" style="'+st+'" aria-hidden="true">'+inner+'</span>'}
+function pal(id){const p=PAL[id]||PAL.set;return '--g1:'+p[0]+';--g2:'+p[1]}
+
+const UI={
 ar:{name:"دفتر الثانية إعدادي",subjects:"المواد",parents:"ركن الوالدين",choose:"اختر مادة",
  lead:"كل درس فيه 5 خطوات: الملخص، الشرح والأمثلة، الكلمات، التمارين بثلاثة مستويات، وركن الوالدين.",lessons:n=>n+" درس",exAll:(n,g)=>n+" تمرين"+(g?" + سلاسل جديدة بلا نهاية":""),
  back:"→ رجوع",st:["الملخص","الشرح","الكلمات","أتمرن","الوالدين"],
@@ -3942,7 +4018,7 @@ ar:{name:"دفتر الثانية إعدادي",subjects:"المواد",parents:
  next:"التالي",finish:"النهاية",again:"عاود هذه السلسلة",nextSet:"السلسلة التالية",toSets:"كل السلاسل",
  set:n=>"السلسلة "+n,setInfo:(a,b)=>"التمارين "+a+" إلى "+b,best:(a,b)=>"أحسن نتيجة "+a+"/"+b,
  lvN:["سهل","متوسط","صعب"],lvLead:"ابدأ بالسهل، ثم انتقل إلى المتوسط والصعب.",
- genBtn:"🎲 سلسلة جديدة",genInfo:"8 تمارين جديدة في كل مرة، بأرقام وجمل مختلفة",genDone:n=>"أنجزت "+n,genAgain:"🎲 سلسلة جديدة أخرى",
+ genBtn:"سلسلة جديدة",genInfo:"8 تمارين جديدة في كل مرة، بأرقام وجمل مختلفة",genDone:n=>"أنجزت "+n,genAgain:"🎲 سلسلة جديدة أخرى",
  handH:"سلاسل التمارين",noneLv:"هذا المستوى غير متوفر لهذا الدرس. جرب مستوى آخر.",
  endT:(a,b)=>"صحيح من المحاولة الأولى: "+a+" من "+b,endP:"المهم هو المحاولة. يمكنك إعادة السلسلة متى شئت.",
  read:"قرأ الدرس",exs:n=>n+" سلسلة",
@@ -3969,7 +4045,7 @@ fr:{name:"Cahier 2e année collège",subjects:"Matières",parents:"Espace parent
  next:"Suivant",finish:"Terminer",again:"Refaire cette série",nextSet:"Série suivante",toSets:"Toutes les séries",
  set:n=>"Série "+n,setInfo:(a,b)=>"Exercices "+a+" à "+b,best:(a,b)=>"Meilleur score "+a+"/"+b,
  lvN:["Facile","Moyen","Difficile"],lvLead:"Commence par Facile, puis passe à Moyen et Difficile.",
- genBtn:"🎲 Nouvelle série",genInfo:"8 exercices nouveaux à chaque fois, avec d'autres nombres et d'autres phrases",genDone:n=>"Fait "+n+" fois",genAgain:"🎲 Encore une nouvelle série",
+ genBtn:"Nouvelle série",genInfo:"8 exercices nouveaux à chaque fois, avec d'autres nombres et d'autres phrases",genDone:n=>"Fait "+n+" fois",genAgain:"🎲 Encore une nouvelle série",
  handH:"Séries d'exercices",noneLv:"Ce niveau n'existe pas pour cette leçon. Essaie un autre niveau.",
  endT:(a,b)=>"Juste du premier coup : "+a+" sur "+b,endP:"Ce qui compte, c'est d'essayer. Tu peux refaire la série quand tu veux.",
  read:"Lu",exs:n=>n+" séries",
@@ -4091,25 +4167,25 @@ function render(){
   $("bLang").textContent=lang==="ar"?"FR":"ع";$("bSize").textContent=x.sizeL[size%3];
   const arrow=lang==="ar"?" ←":" →";
   let h="";
-  const nav=a=>'<nav class="nav"><button type="button" data-go="home" aria-current="'+(a==="home")+'">'+x.subjects+'</button><button type="button" data-go="parents" aria-current="'+(a==="parents")+'">'+x.parents+'</button></nav>';
+  const nav=a=>'<nav class="nav"><button type="button" data-go="home" aria-current="'+(a==="home")+'">'+ico("grid",30)+x.subjects+'</button><button type="button" data-go="parents" aria-current="'+(a==="parents")+'">'+ico("par",30)+x.parents+'</button></nav>';
   if(view.s==="home"){
-    h+=nav("home")+'<div class="starbar"><span>'+x.stars+'</span><b>⭐ '+(P.stars||0)+'</b></div><h2>'+x.choose+'</h2><p class="lead">'+x.lead+'</p><div class="subjects">';
+    h+=nav("home")+'<div class="starbar">'+ico("trophy",36)+'<span>'+x.stars+'</span><b>⭐ '+(P.stars||0)+'</b></div><h2>'+x.choose+'</h2><p class="lead">'+x.lead+'</p><div class="subjects">';
     SUBJ.forEach(S=>{const st=sStats(S);
-      h+='<button type="button" class="subj" data-subj="'+S.id+'"><span class="sym">'+S.sym+'</span><b>'+S.name[lang==="ar"?0:1]+'</b><span>'+x.lessons(st.n)+' · '+x.exAll(st.all,st.g)+'</span><div class="bar"><i style="width:'+Math.round(st.nr/st.n*100)+'%"></i></div></button>'});
+      h+='<button type="button" class="subj" style="'+pal(S.id)+'" data-subj="'+S.id+'">'+ico(S.id,52)+'<b>'+S.name[lang==="ar"?0:1]+'</b><span>'+x.lessons(st.n)+' · '+x.exAll(st.all,st.g)+'</span><div class="bar"><i style="width:'+Math.round(st.nr/st.n*100)+'%"></i></div></button>'});
     h+='</div>';
   }
   else if(view.s==="subj"){
     const S=subj(view.id);let sec=null;
-    h+='<button type="button" class="back" data-go="home">'+x.back+'</button><h2>'+S.name[lang==="ar"?0:1]+'</h2>';
+    const st0=sStats(S);h+='<button type="button" class="back" data-go="home">'+x.back+'</button><div class="shead" style="'+pal(S.id)+'">'+ico(S.id,58)+'<div><h2>'+S.name[lang==="ar"?0:1]+'</h2><p>'+x.lessons(st0.n)+' · '+st0.nr+'/'+st0.n+' ✓</p></div></div>';
     const ne=errList(S.id).length;
-    h+='<div class="quick"><button type="button" class="set" data-quiz="mix"><span class="qi"><b>🔀 '+x.mix+'</b><span>'+x.mixInfo+'</span></span></button><button type="button" class="set" data-quiz="err"'+(ne?'':' disabled')+'><span class="qi"><b>🔁 '+x.errs+'</b><span>'+(ne?x.errsInfo(ne):x.errsNone)+'</span></span></button></div>';
+    h+='<div class="quick"><button type="button" class="set" data-quiz="mix">'+ico("mix",42)+'<span class="qi"><b>'+x.mix+'</b><span>'+x.mixInfo+'</span></span></button><button type="button" class="set" data-quiz="err"'+(ne?'':' disabled')+'>'+ico("err",42)+'<span class="qi"><b>'+x.errs+'</b><span>'+(ne?x.errsInfo(ne):x.errsNone)+'</span></span></button></div>';
     h+='<div dir="'+(S.lang==="ar"?"rtl":"ltr")+'" class="content">';
     S.L.forEach((L,i)=>{
       if(L.s&&L.s!==sec){if(sec!==null)h+='</ol>';sec=L.s;h+='<h3>'+L.s+'</h3><ol class="lessons">'}
       else if(sec===null){sec="";h+='<ol class="lessons">'}
       const r=(P.read[S.id]||{})[i],e=lessonEx(S.id,i),done=Object.keys(e).length+genCount(S.id,i);
       let c='';if(r)c+='<span class="chip ok">✓ '+x.read+'</span>';if(done)c+='<span class="chip">'+x.exs(done)+'</span>';
-      h+='<li><button type="button" data-lesson="'+i+'"><span class="num">'+(i+1)+'</span><span class="tt">'+fmt(L.t)+'</span>'+(c?'<span class="chips">'+c+'</span>':'')+'</button></li>';
+      h+='<li><button type="button" data-lesson="'+i+'">'+ico(S.id,34,i+1)+'<span class="tt">'+fmt(L.t)+'</span>'+(c?'<span class="chips">'+c+'</span>':'')+'</button></li>';
     });
     h+='</ol></div>';
   }
@@ -4117,8 +4193,8 @@ function render(){
     const S=subj(view.id),L=S.L[view.i],step=view.step||0,dir=S.lang==="ar"?"rtl":"ltr";
     if(step===0){const r=P.read[S.id]=P.read[S.id]||{};if(!r[view.i]){r[view.i]=true;save()}}
     h+='<button type="button" class="back" data-back>'+x.back+'</button>';
-    h+='<h2 dir="'+dir+'" class="content"><span class="num" style="margin-inline-end:8px">'+(view.i+1)+'</span>'+fmt(L.t)+'</h2>';
-    h+='<div class="steps" role="tablist">'+x.st.map((n,k)=>'<button type="button" role="tab" data-step="'+k+'" aria-selected="'+(k===step)+'"><small>'+(k+1)+'</small>'+n+'</button>').join("")+'</div>';
+    h+='<div class="lhead" dir="'+dir+'">'+ico(S.id,40,view.i+1)+'<h2 class="content" style="margin:0">'+fmt(L.t)+'</h2></div>';
+    h+='<div class="steps" role="tablist">'+x.st.map((n,k)=>'<button type="button" role="tab" data-step="'+k+'" aria-selected="'+(k===step)+'">'+ico(["sum","exp","words","prac","par"][k],34)+n+'</button>').join("")+'</div>';
     const nextBtn=k=>'<div class="actions"><button type="button" class="btn" data-step="'+k+'">'+x.st[k]+arrow+'</button></div>';
     if(step===0){
       const kf=(KF[S.id]||{})[view.i]||[];if(canSpeak)h+='<div class="actions" style="margin:0 0 10px"><button type="button" class="btn ghost" data-readall="k">'+(view.reading?'⏹ '+x.stopAll:'🔊 '+x.readAll)+'</button></div>';
@@ -4145,7 +4221,7 @@ function render(){
   }
   else if(view.s==="quiz"){
     const S=subj(view.id),dir=S.lang==="ar"?"rtl":"ltr";
-    h+='<button type="button" class="back" data-backsubj>'+x.back+'</button><h2>'+(view.mode==="err"?'🔁 '+x.errs:'🔀 '+x.mix)+'</h2><p class="lead">'+S.name[lang==="ar"?0:1]+'</p>';
+    h+='<button type="button" class="back" data-backsubj>'+x.back+'</button><div class="qhead">'+ico(view.mode==="err"?"err":"mix",44)+'<h2>'+(view.mode==="err"?x.errs:x.mix)+'</h2></div><p class="lead">'+S.name[lang==="ar"?0:1]+'</p>';
     h+='<div dir="'+dir+'" class="content">'+player(S)+'</div>';
   }
   else if(view.s==="parents"){
@@ -4164,13 +4240,13 @@ function render(){
 function levelsHtml(S,L){
   const x=t(),lv=view.lv||1,e=lessonEx(S.id,view.i);
   let h='<p class="lead">'+x.lvLead+'</p><div class="lvtabs" role="tablist">'+[1,2,3].map(l=>{const n=exIdx(L,l).length,g=hasGen(S.id,view.i,l);
-    return '<button type="button" role="tab" data-lv="'+l+'" aria-selected="'+(l===lv)+'"'+(!n&&!g?' class="empty"':'')+'><span class="stars">'+"⭐".repeat(l)+'</span>'+x.lvN[l-1]+'</button>'}).join("")+'</div>';
+    return '<button type="button" role="tab" data-lv="'+l+'" aria-selected="'+(l===lv)+'" style="'+pal("l"+l)+'"'+(!n&&!g?' class="empty"':'')+'><span class="stars">'+ico("l"+l,26).repeat(l)+'</span>'+x.lvN[l-1]+'</button>'}).join("")+'</div>';
   const idx=exIdx(L,lv),g=hasGen(S.id,view.i,lv);
   if(!idx.length&&!g)return h+'<p class="lead">'+x.noneLv+'</p>';
   h+='<div class="sets">';
-  if(g){const gc=genCount(S.id,view.i);h+='<button type="button" class="set gen" data-gen="'+lv+'"><span class="qi"><b>'+x.genBtn+'</b><span>'+x.genInfo+'</span></span>'+(gc?'<span class="chip">'+x.genDone(gc)+'</span>':'')+'</button>'}
+  if(g){const gc=genCount(S.id,view.i);h+='<button type="button" class="set gen" data-gen="'+lv+'">'+ico("dice",42)+'<span class="qi"><b>'+x.genBtn+'</b><span>'+x.genInfo+'</span></span>'+(gc?'<span class="chip">'+x.genDone(gc)+'</span>':'')+'</button>'}
   for(let s=0;s<Math.ceil(idx.length/SET);s++){const a=s*SET,b=Math.min(idx.length,(s+1)*SET),key=lv+"-"+s,done=e[key]!=null;
-    h+='<button type="button" class="set" data-set="'+s+'"><span class="qi"><b>'+x.set(s+1)+'</b><span>'+x.setInfo(a+1,b)+'</span></span>'+(done?'<span class="chip'+(e[key]===b-a?' ok':'')+'">'+x.best(e[key],b-a)+'</span>':'')+'</button>'}
+    h+='<button type="button" class="set" data-set="'+s+'">'+ico("set",42,s+1)+'<span class="qi"><b>'+x.set(s+1)+'</b><span>'+x.setInfo(a+1,b)+'</span></span>'+(done?'<span class="chip'+(e[key]===b-a?' ok':'')+'">'+x.best(e[key],b-a)+'</span>':'')+'</button>'}
   return h+'</div>';
 }
 
